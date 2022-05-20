@@ -1,0 +1,21 @@
+<h1>Liste: <%= @list.name %></h1>
+<hr>
+<ul>
+  <% @list.bookmarks.each do |bookmark| %>
+  <% movie = Movie.find_by(id: bookmark.movie_id) %>
+  <li><%= movie.title %></li>
+  <% end %>
+</ul>
+<hr>
+<br>
+<br>
+<h4>Add a Movie to this wonderful list</h4>
+
+<%= simple_form_for [@list, @bookmark] do |f| %>
+  <%= f.association :movie %>
+  <%= f.input :comment %>
+  <%= f.submit %>
+<% end %>
+
+<%# <%= link_to "Add a new bookmark", new_bookmark_path, class: "btn btn-primary btn-sm" %>
+<%= link_to "Back to all lists", lists_path %>
